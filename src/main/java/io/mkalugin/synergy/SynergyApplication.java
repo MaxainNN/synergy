@@ -1,20 +1,26 @@
 package io.mkalugin.synergy;
 
-import io.mkalugin.synergy.config.AppConfig;
-import io.mkalugin.synergy.model.Contact;
-import io.mkalugin.synergy.service.ContactService;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-import java.util.List;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.annotation.Bean;
+import org.springframework.core.env.Environment;
 
+@SpringBootApplication
+@EnableCaching
 public class SynergyApplication {
 
 	public static void main(String[] args) {
-		ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-		ContactService contactService = context.getBean(ContactService.class);
+		SpringApplication.run(SynergyApplication.class, args);
+	}
 
-		List<Contact> contacts = contactService.findAll();
-		contacts.forEach(System.out::println);
+	@Bean
+	public CommandLineRunner profileCheck(Environment environment) {
+		return args -> {
+			System.out.println("Active Profiles: "
+					+ String.join(", ", environment.getActiveProfiles()));
+		};
 	}
 }

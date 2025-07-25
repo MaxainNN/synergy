@@ -35,57 +35,58 @@ Ivanova,Oksana,Vladimirocna,79522191213
 ```
 
 3) Для чтения файла необходимо применить аннотацию @Value,
-   предварительно ознакомившись с документацией на официальном
-   сайте Spring (см. вспомогательные материалы к домашнему заданию)
+предварительно ознакомившись с документацией на официальном
+сайте Spring.
 
 4) Создать новый интерфейс ContactService и его имплементацию
-   ContactServiceCsvImpl. Названия метода для поиска контактов
-   назвать findAll(). В имплементации должна находиться вся логика
-   по чтению и обработке контактов в CSV файле
+ContactServiceCsvImpl. Названия метода для поиска контактов
+назвать findAll(). В имплементации должна находиться вся логика
+по чтению и обработке контактов в CSV файле
 
 5) Все зависимости должны быть настроены в IoC контейнере
 
 6) В консоли нужно вывести список контактов в следующем
-   формате: «LastName FirstName MiddleName, Phone»
+формате: «LastName FirstName MiddleName, Phone»
 
 7) Опциональное задание со звездочкой*: приложение
-   должно корректно запускаться с помощью "java -jar
+должно корректно запускаться с помощью "java -jar
 
-#### Рекомендации :
+### Task 3:
 
-- Все классы в приложении должны решать строго
-определённую задачу (см. "Правила оформления
-кода", прикреплённые в доп. материале)
-
-- Имя ресурса с контактами (CSV-файла)
-  можно захардкодить строчкой
-
-- CSV с вопросами читается именно как ресурс, а не как файл
-
-- Весь ввод-вывод осуществляется на английском языке.
-  Это нужно во избежание ошибок с кодировками
-
-- Крайне желательно написать юнит-тест какого-нибудь
-  сервиса. Оцениваться будет только попытка написать тест
-
-- Помним - "без фанатизма"
-
-#### Результат :
-Простое приложение (мини чат-бот) на Spring, которое выводит
-в консоль список контактов из файла contacts.csv при запуске
+1) Нужно подключить `Spring MVC` стартер в проект
+2) Создать `CRUD REST API` приложения для сервиса `ContactService`,
+который мы делали в прошлом домашнем задании
+3) Создать контроллер для получения случайных данных
+пользователя. Назвать его `UserController`
+4) Добавить несколько spring профилей. Должны быть `dev`, `test`, `prod`.
+Запуск каждого профиля реализовать на разных портах.
+5) Все зависимости должны быть настроены в `IoC` контейнере
+6) Опциональное задание со звездочкой*: нужно
+добавить кэширование в `ContactService`. (`spring caching`)
 
 Структура :
 
 ```text
 src
 ├──/main/java/io/mkalugin/synergy/
+│    ├── client
+│    │     └── JokeClient.java
 │    ├── config
-│    │     └── AppConfig.java
-│    ├── model
-│    │     └── Contact.java
+│    │     ├── AppConfig.java
+│    │     └── FeignConfig.java
+│    ├── controller  
+│    │     ├── ContactController.java
+│    │     └── Joke.java
+│    ├── dto
+│    │     ├── Contact.java
+│    │     └── Joke.java
+│    ├── repository
+│    │     └── ContactRepository.java 
 │    ├── service
 │    │     ├── ContactService.java
-│    │     └── ContactServiceImpl.java     
+│    │     ├── ContactServiceImpl.java 
+│    │     ├── JokeService.java
+│    │     └── JokeServiceImpl.java    
 │    └── SynergyApplication.java
 └──/test/java/io/mkalugin/synergy/
      └── ContactServiceImplTest.java
@@ -97,11 +98,26 @@ src
 ### Запуск приложения с помошью jar файла:
 
 ```bash
-mvn clean package
-java -jar target/synergy-0.0.1-SNAPSHOT.jar --contacts.file.path=C:\Users\mkalugin\IdeaProjects\synergy\src\main\resources\contacts.csv
+    mvn clean package
+    java -jar target/synergy-0.0.1-SNAPSHOT.jar
 ```
 
-#### Вывод в консоли :
+### Запуск приложения с профилями:
+
+```bash
+    mvn spring-boot:run -D"spring-boot.run.profiles=dev"
+    mvn spring-boot:run -D"spring-boot.run.profiles=test"
+    mvn spring-boot:run -D"spring-boot.run.profiles=prod"
+    mvn spring-boot:run # Дефолтный профиль для локального запуска
+```
+
+### Проверка статуса приложения:
+
+```bash
+  http://localhost:8080/actuator/health
+```
+
+#### Вывод в консоли (Реализация в рамках task 2):
 <img src='images/13.07_screen_jar_file.png' width=500 height=200>
 
 ### Полезные ссылки :
