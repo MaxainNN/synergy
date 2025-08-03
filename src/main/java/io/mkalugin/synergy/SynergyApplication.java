@@ -1,6 +1,6 @@
 package io.mkalugin.synergy;
 
-
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +10,7 @@ import org.springframework.core.env.Environment;
 
 @SpringBootApplication
 @EnableCaching
+@Slf4j
 public class SynergyApplication {
 
 	public static void main(String[] args) {
@@ -18,9 +19,7 @@ public class SynergyApplication {
 
 	@Bean
 	public CommandLineRunner profileCheck(Environment environment) {
-		return args -> {
-			System.out.println("Active Profiles: "
-					+ String.join(", ", environment.getActiveProfiles()));
-		};
+		return args -> log.info("Active Profiles: {}",
+				String.join(", ", environment.getActiveProfiles()));
 	}
 }

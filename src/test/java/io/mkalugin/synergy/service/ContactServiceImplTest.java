@@ -1,8 +1,7 @@
-package io.mkalugin.synergy;
+package io.mkalugin.synergy.service;
 
 import io.mkalugin.synergy.dto.Contact;
 import io.mkalugin.synergy.repository.ContactRepository;
-import io.mkalugin.synergy.service.ContactServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ContactServiceImplTest {
+class ContactServiceImplTest {
 
     @Mock
     private ContactRepository contactRepository;

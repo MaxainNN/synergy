@@ -1,6 +1,7 @@
 package io.mkalugin.synergy.repository;
 
 import io.mkalugin.synergy.dto.Contact;
+import io.mkalugin.synergy.exception.ContactsLoadingException;
 import jakarta.annotation.PostConstruct;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
@@ -42,7 +43,7 @@ public class ContactRepository {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Failed to load contacts.csv", e);
+            throw new ContactsLoadingException("Failed to load contacts.csv", e);
         }
     }
 

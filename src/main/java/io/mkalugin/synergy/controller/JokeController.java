@@ -4,6 +4,7 @@ import feign.FeignException;
 import io.mkalugin.synergy.dto.Joke;
 import io.mkalugin.synergy.service.JokeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,11 +21,15 @@ public class JokeController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getJokeResponse() {
+    public ResponseEntity<Joke> getJokeResponse() {
         try {
-            return ResponseEntity.ok(jokeService.getJokes());
+            Joke joke = jokeService.getJokes();
+            if (joke == null) {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            }
+            return ResponseEntity.ok(joke);
         } catch (FeignException e) {
-            return ResponseEntity.status(e.status()).body("Error getting Joke");
+            return ResponseEntity.status(e.status()).build();
         }
     }
 }

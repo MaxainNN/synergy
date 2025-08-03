@@ -3,6 +3,7 @@ package io.mkalugin.synergy.controller;
 import io.mkalugin.synergy.dto.Contact;
 import io.mkalugin.synergy.service.ContactServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,6 +32,7 @@ public class ContactController {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public Contact createContact(@RequestBody Contact contact) {
         return contactService.save(contact);
     }

@@ -6,6 +6,6 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @ComponentScan("io.mkalugin.synergy")
-@PropertySource("classpath:application-prod.properties")
+@PropertySource("classpath:application.properties")
 public class AppConfig {
 }
