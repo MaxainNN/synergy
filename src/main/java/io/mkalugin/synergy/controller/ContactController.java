@@ -1,6 +1,6 @@
 package io.mkalugin.synergy.controller;
 
-import io.mkalugin.synergy.dto.Contact;
+import io.mkalugin.synergy.dto.ContactDto;
 import io.mkalugin.synergy.service.ContactServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,12 +20,12 @@ public class ContactController {
     }
 
     @GetMapping
-    public List<Contact> getAllContacts() {
+    public List<ContactDto> getAllContacts() {
         return contactService.findAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Contact> getContactById(@PathVariable Long id) {
+    public ResponseEntity<ContactDto> getContactById(@PathVariable Long id) {
         return contactService.findById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
@@ -33,12 +33,12 @@ public class ContactController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Contact createContact(@RequestBody Contact contact) {
+    public ContactDto createContact(@RequestBody ContactDto contact) {
         return contactService.save(contact);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Contact> updateContact(@PathVariable Long id, @RequestBody Contact contact) {
+    public ResponseEntity<ContactDto> updateContact(@PathVariable Long id, @RequestBody ContactDto contact) {
         if (contactService.findById(id).isEmpty()) {
             return ResponseEntity.notFound().build();
         }

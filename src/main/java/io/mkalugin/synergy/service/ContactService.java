@@ -1,13 +1,13 @@
 package io.mkalugin.synergy.service;
 
-import io.mkalugin.synergy.dto.Contact;
+import io.mkalugin.synergy.dto.ContactDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface ContactService {
-    List<Contact> findAll();
-    Optional<Contact> findById(Long id);
-    Contact save(Contact contact);
+    List<ContactDto> findAll();
+    Optional<ContactDto> findById(Long id);
+    ContactDto save(ContactDto contact);
     void delete(Long id);
 }

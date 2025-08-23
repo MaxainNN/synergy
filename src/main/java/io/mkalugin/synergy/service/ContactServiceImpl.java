@@ -1,6 +1,7 @@
 package io.mkalugin.synergy.service;
 
-import io.mkalugin.synergy.dto.Contact;
+import io.mkalugin.synergy.dto.ContactDto;
+import io.mkalugin.synergy.model.Contact;
 import io.mkalugin.synergy.repository.ContactRepository;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
@@ -9,9 +10,11 @@ import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Slf4j
 @Service
@@ -28,28 +31,37 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     @Cacheable("contacts")
-    public List<Contact> findAll() {
+    @Transactional(readOnly = true)
+    public List<ContactDto> findAll() {
         log.info("Fetching all contacts (not from cache)");
-        return contactRepository.findAll();
+        return contactRepository.findAll().stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     @Override
     @Cacheable(value = "contact", key = "#id")
-    public Optional<Contact> findById(Long id) {
+    @Transactional(readOnly = true)
+    public Optional<ContactDto> findById(Long id) {
         log.info("Fetching contact {} (not from cache)", id);
-        return contactRepository.findById(id);
+        return contactRepository.findById(id)
+                .map(this::convertToDto);
     }
 
     @Override
     @CacheEvict(value = {"contacts", "contact"}, allEntries = true)
-    public Contact save(Contact contact) {
-        return contactRepository.save(contact);
+    @Transactional
+    public ContactDto save(ContactDto contactDto) {
+        Contact contact = convertToEntity(contactDto);
+        Contact savedContact = contactRepository.save(contact);
+        return convertToDto(savedContact);
     }
 
     @Override
     @CacheEvict(value = {"contacts", "contact"}, allEntries = true)
+    @Transactional
     public void delete(Long id) {
-        contactRepository.delete(id);
+        contactRepository.deleteById(id);
     }
 
     @CacheEvict(value = {"contacts", "contact"}, allEntries = true)
@@ -57,4 +69,21 @@ public class ContactServiceImpl implements ContactService {
         log.info("Cache cleared");
     }
 
+    private ContactDto convertToDto(Contact contact) {
+        return new ContactDto(
+                contact.getId(),
+                contact.getLastName(),
+                contact.getFirstName(),
+                contact.getPhone()
+        );
+    }
+
+    private Contact convertToEntity(ContactDto dto) {
+        Contact contact = new Contact();
+        contact.setId(dto.getId());
+        contact.setLastName(dto.getLastName());
+        contact.setFirstName(dto.getFirstName());
+        contact.setPhone(dto.getPhone());
+        return contact;
+    }
 }

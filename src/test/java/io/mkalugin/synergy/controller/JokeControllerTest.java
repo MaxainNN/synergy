@@ -1,7 +1,7 @@
 package io.mkalugin.synergy.controller;
 
 import feign.FeignException;
-import io.mkalugin.synergy.dto.Joke;
+import io.mkalugin.synergy.dto.JokeDto;
 import io.mkalugin.synergy.service.JokeService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -47,7 +47,7 @@ class JokeControllerTest {
         try {
             log.info("Starting test: whenGetJoke_thenReturnsNonEmptyResponse");
 
-            Joke testJoke = new Joke(1,"Test setup", "Test punchline","test type");
+            JokeDto testJoke = new JokeDto(1,"Test setup", "Test punchline","test type");
             Mockito.when(jokeService.getJokes()).thenReturn(testJoke);
 
             MvcResult result = mockMvc.perform(MockMvcRequestBuilders.get("/api/joke")

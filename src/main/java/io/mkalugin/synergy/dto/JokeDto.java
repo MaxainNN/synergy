@@ -9,7 +9,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class Joke {
+public class JokeDto {
     private int id;
     private String setup;
     private String punchline;

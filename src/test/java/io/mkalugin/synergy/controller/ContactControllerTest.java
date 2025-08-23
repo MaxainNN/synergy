@@ -1,6 +1,6 @@
 package io.mkalugin.synergy.controller;
 
-import io.mkalugin.synergy.dto.Contact;
+import io.mkalugin.synergy.dto.ContactDto;
 import io.mkalugin.synergy.service.ContactServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -58,7 +58,7 @@ class ContactControllerTest {
         }
     }
 
-    private static final Contact expectedContact = new Contact(1L,
+    private static final ContactDto expectedContact = new ContactDto(1L,
             "Alexey",
             "Leonov",
             "79990190299");
@@ -111,9 +111,9 @@ class ContactControllerTest {
     void checkCreateContact() throws Exception {
         log.info("Starting test: checkCreateContact");
 
-        Contact savedContact = new Contact(2L, "Maxim", "Kalugin", "79191778546");
+        ContactDto savedContact = new ContactDto(2L, "Maxim", "Kalugin", "79191778546");
 
-        Mockito.when(contactServiceImpl.save(Mockito.any(Contact.class)))
+        Mockito.when(contactServiceImpl.save(Mockito.any(ContactDto.class)))
                 .thenReturn(savedContact);
 
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/api/contacts")

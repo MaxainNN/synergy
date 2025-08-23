@@ -1,8 +1,8 @@
 package io.mkalugin.synergy.service;
 
-import io.mkalugin.synergy.dto.Joke;
+import io.mkalugin.synergy.dto.JokeDto;
 
 
 public interface JokeService {
-    Joke getJokes();
+    JokeDto getJokes();
 }

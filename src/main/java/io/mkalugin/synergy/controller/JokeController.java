@@ -1,7 +1,7 @@
 package io.mkalugin.synergy.controller;
 
 import feign.FeignException;
-import io.mkalugin.synergy.dto.Joke;
+import io.mkalugin.synergy.dto.JokeDto;
 import io.mkalugin.synergy.service.JokeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,9 +21,9 @@ public class JokeController {
     }
 
     @GetMapping
-    public ResponseEntity<Joke> getJokeResponse() {
+    public ResponseEntity<JokeDto> getJokeResponse() {
         try {
-            Joke joke = jokeService.getJokes();
+            JokeDto joke = jokeService.getJokes();
             if (joke == null) {
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
             }

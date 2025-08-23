@@ -1,7 +1,7 @@
 package io.mkalugin.synergy.service;
 
 import io.mkalugin.synergy.client.JokeClient;
-import io.mkalugin.synergy.dto.Joke;
+import io.mkalugin.synergy.dto.JokeDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ public class JokeServiceImpl implements JokeService {
     }
 
     @Override
-    public Joke getJokes() {
+    public JokeDto getJokes() {
         return jokeClient.getJoke();
     }
 }
