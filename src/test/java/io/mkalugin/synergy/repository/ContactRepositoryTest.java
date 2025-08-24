@@ -82,9 +82,10 @@ class ContactRepositoryTest {
 
         contactRepository.deleteById(savedContact.getId());
         entityManager.flush();
+        entityManager.clear();
 
         Contact deletedContact = entityManager.find(Contact.class, savedContact.getId());
-        //assertNull(deletedContact);
+        assertNull(deletedContact);
     }
 
     @Test

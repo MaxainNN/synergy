@@ -86,6 +86,15 @@ ContactServiceCsvImpl. Названия метода для поиска кон�
 4) Написать тесты для `ContactRepository`
 5) Подключить `Lombok` и использовать его аннотации в проекте
 
+### Task 6:
+
+1) Нужно подключить аннотацию 
+`@EnableTransactionManagement` в проект
+2) Добавить транзакции для всех операций 
+в `ContactServiceImpl`
+3) Использовать свой класс для исключения
+в случае возникновения ошибки в транзакции
+
 Структура :
 
 ```text
@@ -103,7 +112,8 @@ src
 │    │     ├── ContactDto.java
 │    │     └── JokeDto.java
 │    ├── exception
-│    │     └── ContactLoadingException.java 
+│    │     ├── ContactLoadingException.java 
+│    │     └──TransactionalException.java 
 │    ├── model
 │    │     └── Contact.java 
 │    ├── repository
@@ -116,8 +126,10 @@ src
 │    └── SynergyApplication.java
 └──/test/java/io/mkalugin/synergy/
      ├── controller
-     │     ├──ContactControllerTest.java
+     │     ├── ContactControllerTest.java
      │     └── JokeControllerTest.java
+     ├── repository
+     │     └── ContactRepositoryTest.java
      └── service
            └──ContactServiceImplTest.java
 ```
@@ -163,5 +175,7 @@ src
 ### Полезные ссылки :
 
 [Ресурсы Spring](https://docs.spring.io/spring-framework/reference/core/resources.html)
+
+[Транзакции в Spring](https://habr.com/ru/articles/682362/)
 
 ### Автор : Калугин Максим
