@@ -120,8 +120,8 @@ public class ContactServiceImpl implements ContactService {
     public ContactDto convertToDto(Contact contact) {
         return new ContactDto(
                 contact.getId(),
-                contact.getLastName(),
                 contact.getFirstName(),
+                contact.getLastName(),
                 contact.getPhone()
         );
     }
@@ -129,8 +129,8 @@ public class ContactServiceImpl implements ContactService {
     public Contact convertToEntity(ContactDto dto) {
         Contact contact = new Contact();
         contact.setId(dto.getId());
-        contact.setLastName(dto.getLastName());
         contact.setFirstName(dto.getFirstName());
+        contact.setLastName(dto.getLastName());
         contact.setPhone(dto.getPhone());
         return contact;
     }

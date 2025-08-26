@@ -1,7 +1,7 @@
 package io.mkalugin.synergy.repository;
 
 import io.mkalugin.synergy.model.Contact;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
@@ -14,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 @ActiveProfiles("test")
+@DisplayName("Repository tests")
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class ContactRepositoryTest {
 
     @Autowired
@@ -23,9 +25,17 @@ class ContactRepositoryTest {
     private ContactRepository contactRepository;
 
     @Test
+    @Order(1)
+    @DisplayName("Find All works")
     void findAll_ShouldReturnAllContacts() {
-        Contact contact1 = new Contact(null, "Ivanov", "Ivan", "+7-912-345-67-89");
-        Contact contact2 = new Contact(null, "Petrov", "Petr", "+7-923-456-78-90");
+        Contact contact1 = new Contact(null,
+                "Ivan",
+                "Ivanov",
+                "+7-912-345-67-89");
+        Contact contact2 = new Contact(null,
+                "Petr",
+                "Petrov",
+                "+7-923-456-78-90");
 
         entityManager.persist(contact1);
         entityManager.persist(contact2);
@@ -39,8 +49,14 @@ class ContactRepositoryTest {
     }
 
     @Test
+    @Order(2)
+    @DisplayName("Find By Id works")
     void findById_ShouldReturnContactWhenExists() {
-        Contact contact = new Contact(null, "Sidorov", "Sergey", "+7-934-567-89-01");
+        Contact contact = new Contact(null,
+                "Sergey",
+                "Sidorov",
+                "+7-934-567-89-01");
+
         Contact savedContact = entityManager.persist(contact);
         entityManager.flush();
 
@@ -53,14 +69,21 @@ class ContactRepositoryTest {
     }
 
     @Test
+    @Order(3)
+    @DisplayName("Find By return empty")
     void findById_ShouldReturnEmptyWhenNotExists() {
         Optional<Contact> foundContact = contactRepository.findById(999L);
         assertFalse(foundContact.isPresent());
     }
 
     @Test
+    @Order(4)
+    @DisplayName("Save works")
     void save_ShouldPersistContact() {
-        Contact contact = new Contact(null, "Kuznetsov", "Alex", "+7-945-678-90-12");
+        Contact contact = new Contact(null,
+                "Alex",
+                "Kuznetsov",
+                "+7-945-678-90-12");
 
         Contact savedContact = contactRepository.save(contact);
 
@@ -75,8 +98,13 @@ class ContactRepositoryTest {
     }
 
     @Test
+    @Order(5)
+    @DisplayName("Delete works")
     void deleteById_ShouldRemoveContact() {
-        Contact contact = new Contact(null, "Smirnov", "Dmitry", "+7-956-789-01-23");
+        Contact contact = new Contact(null,
+                "Dmitry",
+                "Smirnov",
+                "+7-956-789-01-23");
         Contact savedContact = entityManager.persist(contact);
         entityManager.flush();
 
@@ -89,11 +117,16 @@ class ContactRepositoryTest {
     }
 
     @Test
+    @Order(6)
+    @DisplayName("Save updating")
     void save_ShouldUpdateExistingContact() {
-        Contact contact = new Contact(null, "Orlov", "Oleg", "+7-967-890-12-34");
+        Contact contact = new Contact(null,
+                "Oleg",
+                "Orlov",
+                "+7-967-890-12-34");
+
         Contact savedContact = entityManager.persist(contact);
         entityManager.flush();
-
         savedContact.setPhone("+7-999-999-99-99");
         Contact updatedContact = contactRepository.save(savedContact);
         entityManager.flush();

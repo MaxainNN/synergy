@@ -5,6 +5,7 @@ import io.mkalugin.synergy.service.ContactServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("api/contacts")
 @RequiredArgsConstructor
+@PreAuthorize("hasAnyRole('USER', 'ADMIN')")
 public class ContactController {
 
     private final ContactServiceImpl contactService;
@@ -44,6 +46,7 @@ public class ContactController {
         return ResponseEntity.ok(contactService.save(contact));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteContact(@PathVariable Long id) {
         if (contactService.findById(id).isEmpty()) {
