@@ -28,7 +28,6 @@ public class SecurityConfig {
         http.authorizeHttpRequests(auth -> auth
                         .requestMatchers("/actuator/**").permitAll()
                         .anyRequest().authenticated())
-//                          .anyRequest().permitAll())
                 .httpBasic(Customizer.withDefaults())
                 .userDetailsService(customUserDetailsService)
                 .csrf(csrf -> csrf.disable())
@@ -47,5 +46,5 @@ public class SecurityConfig {
     public AuthenticationManager authenticationManager(
             AuthenticationConfiguration authenticationConfiguration) throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
-}
+    }
 }

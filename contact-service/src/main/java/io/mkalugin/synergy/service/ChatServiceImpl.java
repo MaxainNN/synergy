@@ -50,7 +50,6 @@ public class ChatServiceImpl implements ChatService {
     @KafkaListener(
             topics = "chat-consumer-topic",
             groupId = "chat-group")
-//            containerFactory = "kafkaListenerContainerFactory")
     public void processMessage(@Payload MessageDto chatMessage) {
         log.info("Received message: {}", chatMessage.getMessage());
 
@@ -67,7 +66,7 @@ public class ChatServiceImpl implements ChatService {
     @Bean
     public Supplier<Message<MessageDto>> produceMessage() {
         return () -> {
-            // Здесь можно реализовать периодическую отправку сообщений
+            // scheduler message producer
             return null;
         };
     }

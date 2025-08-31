@@ -4,27 +4,24 @@
 
 ### Description
 
-Project with application on Spring. Goal of this
+Project with application on Spring. The Goal of this
 project is to improve my Spring knowledge.
 All tasks completed according to the `Synergy University`
 tasks.
 
 ### Task 1:
 
-Создать приложение с помощью `Spring IoC`, чтобы 
-познакомиться с основной функциональностью `IoC`, 
-на которой строится весь `Spring`.
+Create an application using `Spring IoC` to
+get acquainted with the basic functionality of `IoC`,
+on which all `Spring` is built.
 
-1) Нужно создать простое приложение (мини чат бот) на `Spring`,
-которое будет выводить в консоль список контактов.
-
-2) При помощи блокнота создать файл contacts.csv и
-добавить туда 5 человек. Фамилия, имя, отчество, номер
-телефона. Сохранить в виде `CSV` файла («Сохранить как…»
-пишем «contacts.csv» и нажимаем «сохранить»)
-
-Содержимое файла должно получиться примерно следующее:
-
+1) You need to create a simple application (mini chat bot) on `Spring`,
+   which will output a list of contacts to the console.
+2) Using notepad, create a file contacts.csv and
+   add 5 people there. Last name, first name, middle name,
+   phone number. Save as a `CSV` file ("Save as..."
+   write "contacts.csv" and click "save")
+   The contents of the file should be something like this:
 ```text
 LastName,FirstName,MiddleName,Phone
 Leonov,Alexey,Vladimirovich,79990190299
@@ -33,75 +30,68 @@ Stepanov,Petr,Ivanovich,79881233245
 Petrakov,Alexandr,Alexeyevich,79532111296
 Ivanova,Oksana,Vladimirocna,79522191213
 ```
-
-3) Для чтения файла необходимо применить аннотацию `@Value`,
-предварительно ознакомившись с документацией на официальном
-сайте `Spring`.
-
-4) Создать новый интерфейс `ContactService` и его имплементацию
-`ContactServiceCsvImpl`. Названия метода для поиска контактов
-назвать `findAll()`. В имплементации должна находиться вся логика
-по чтению и обработке контактов в `CSV` файле
-
-5) Все зависимости должны быть настроены в `IoC` контейнере
-
-6) В консоли нужно вывести список контактов в следующем
-формате: «LastName FirstName MiddleName, Phone»
-
-7) Опциональное задание со звездочкой*: приложение
-должно корректно запускаться с помощью `java -jar`
+3) To read the file, you need to apply the annotation `@Value`, 
+having previously read the documentation on the official
+website of `Spring`.
+4) Create a new interface `ContactService` and its implementation
+`ContactServiceCsvImpl`. The name of the method for finding contacts
+should be `findAll()`. The implementation should contain all the logic
+for reading and processing contacts in the `CSV` file
+5) All dependencies should be configured in the `IoC` container
+6) In the console, you need to display a list of contacts in the following
+format: "LastName FirstName MiddleName, Phone"
+7) The application
+   should be correctly launched using `java -jar`
 
 ### Task 2:
 
-1) Нужно подключить `Spring MVC` стартер в проект
-2) Создать `CRUD REST API` приложения для сервиса `ContactService`,
-который мы делали в прошлом домашнем задании
-3) Создать контроллер для получения случайных данных
-пользователя. Назвать его `UserController`
-4) Добавить несколько spring профилей. Должны быть `dev`, `test`, `prod`.
-Запуск каждого профиля реализовать на разных портах.
-5) Все зависимости должны быть настроены в `IoC` контейнере
-6) Опциональное задание со звездочкой*: нужно
-добавить кэширование в `ContactService`. (`spring caching`)
+1) Need to connect `Spring MVC` starter to the project
+2) Create `CRUD REST API` application for `ContactService` service
+3) Create a controller for receiving random user data. 
+Call it `UserController`
+4) Add several spring profiles. There should be `dev`, `test`, `prod`.
+   Implement the launch of each profile on different ports.
+5) All dependencies should be configured in the `IoC` container
+6) Optional task with an asterisk*: need to
+   add caching to `ContactService`. (`spring caching`)
 
 ### Task 3:
 
-1) Написать интеграционные тесты для контроллера
-получения случайных данных пользователя `UserController`
-(`JokeController`)
-2) Написать юнит тесты для `CRUD REST API` сервиса 
-`ContactService`, который мы делали в 
-прошлом домашнем задании
-3) Написать `mvc` тесты для `ContactController`, который
-мы делали в прошлом домашнем задании
-4) исправить все сонар
-ошибки, которые у вас есть в проекте. Искать при помощи
-плагина в `IDEA SonarLint` с конфигурацией по умолчанию
+1) Write integration tests for the `UserController` (`JokeController`)
+2) Write unit tests for the `CRUD REST API` of the
+   `ContactService` service, which we did in the
+   previous homework
+3) Write `mvc` tests for `ContactController`, which
+   we did in the previous homework
+4) Fix all the sonar
+   errors that you have in the project. 
+Search using the plugin in `IDEA SonarLint` 
+with the default configuration.
 
 ### Task 4:
 
-1) Нужно подключить `Spring Data` стартер в проект
-2) Создать сущность `Contact` и репозиторий `ContactRepository`
-3) Написать тесты для `ContactRepository`
-4) Подключить `Lombok` и использовать его аннотации в проекте
+1) Need to include `Spring Data` starter in the project
+2) Create entity `Contact` and repository `ContactRepository`
+3) Write tests for `ContactRepository`
+4) Include `Lombok` and use its annotations in the project
 
 ### Task 5:
 
-1) Нужно подключить аннотацию 
-`@EnableTransactionManagement` в проект
-2) Добавить транзакции для всех операций 
-в `ContactServiceImpl`
-3) Использовать свой класс для исключения
-в случае возникновения ошибки в транзакции
+1) Add annotation
+   `@EnableTransactionManagement` in the project
+2) Add transactions for all operations
+   in `ContactServiceImpl`
+3) Use your own class for exception
+   in case of an error in the transaction
 
 ### Task 6:
 
-1) Подключить стартеры и конфигурацию 
-`SecurityConfig` для системы безопасности
-2) Защитить вызовы методов `ContactContoller`
-3) Для метода удаления контактов добавить
-`@PreAuthorize` `("hasRole('ADMIN')")`
-4) Сделать аутентификацию при помощи базы данных
+1) Connect starters and configuration
+   `SecurityConfig` for the security system
+2) Protect `ContactContoller` methods
+3) For the method for deleting contacts, add
+   `@PreAuthorize` `("hasRole('ADMIN')")`
+4) Make authentication using the database
 
 ### Task 7:
 
@@ -112,8 +102,13 @@ with name `ChatService` and `ChatServiceImpl`
 3) Create logic answer-question to inbox.
 Example: What time? Answer: 10:00
 
+### Task 8:
 
-### Project structure :
+1) Add additional methods to Gateway for `ChatServiceImpl`
+2) Configure application security at the Gateway level.
+
+
+### `contact-service` structure :
 
 ```text
 src
@@ -122,27 +117,41 @@ src
 │    │     └── JokeClient.java
 │    ├── config
 │    │     ├── AppConfig.java
+│    │     ├── DataInitializer.java
+│    │     ├── KafkaConfig.java
+│    │     ├── SecurityConfig.java
 │    │     └── FeignConfig.java
 │    ├── controller  
+│    │     ├── ChatController.java
 │    │     ├── ContactController.java
 │    │     └── Joke.java
 │    ├── dto
+│    │     ├── MessageDto.java
 │    │     ├── ContactDto.java
 │    │     └── JokeDto.java
 │    ├── exception
 │    │     ├── ContactLoadingException.java 
-│    │     └──TransactionalException.java 
+│    │     └── TransactionalException.java 
 │    ├── model
+│    │     ├── Role.java
+│    │     ├── User.java
 │    │     └── Contact.java 
 │    ├── repository
+│    │     ├── RoleController.java
+│    │     ├── UserController.java
 │    │     └── ContactRepository.java 
 │    ├── service
+│    │     ├── ChatService.java
+│    │     ├── ChatServiceImpl.java 
+│    │     ├── CustomUserDetailsService.java
 │    │     ├── ContactService.java
 │    │     ├── ContactServiceImpl.java 
 │    │     ├── JokeService.java
 │    │     └── JokeServiceImpl.java    
 │    └── SynergyApplication.java
 └──/test/java/io/mkalugin/synergy/
+     ├── kafka
+     │     ├── ChatServiceKafkaTest.java
      ├── controller
      │     ├── ContactControllerTest.java
      │     └── JokeControllerTest.java
@@ -152,7 +161,7 @@ src
            └──ContactServiceImplTest.java
 ```
 
-### Run jar rile:
+### Run jar file:
 
 ```bash
     mvn clean package
@@ -165,13 +174,6 @@ src
     mvn spring-boot:run -D"spring-boot.run.profiles=dev"
     mvn spring-boot:run -D"spring-boot.run.profiles=test"
     mvn spring-boot:run -D"spring-boot.run.profiles=prod"
-    mvn spring-boot:run # Дефолтный профиль для локального запуска
-```
-
-### Check app status:
-
-```bash
-  http://localhost:8080/actuator/health
 ```
 
 ### SonarQube errors:
@@ -186,6 +188,12 @@ src
 <img src='images/23.08_sc.png' width=500 height=200>
 
 <img src='images/23.08_sc_1.png' width=500 height=200>
+
+### Request via Gateway:
+
+<img src='images/31.08_sc.png' width=500 height=200>
+
+<img src='images/31.08_sc_1.png' width=500 height=500>
 
 ### Usefull links :
 
